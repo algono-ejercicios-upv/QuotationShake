@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">QuotationShake</string>
+    <string name="get_option">Get Quotations</string>
+    <string name="favourite_option">Favourite Quotations</string>
+    <string name="settings_option">Settings</string>
+    <string name="about_option">About</string>
 </resources>
