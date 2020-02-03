@@ -7,11 +7,12 @@
     tools:context=".FavouriteActivity">
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/button_author_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="onAuthorInfoPressed"
         android:text="@string/favourite_author_info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
