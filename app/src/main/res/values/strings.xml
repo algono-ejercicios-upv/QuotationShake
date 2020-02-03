@@ -15,9 +15,9 @@
 
     <string name="about_title">About</string>
     <string name="about_app_name">QUOTATIONSHAKE by</string>
-    <string name="about_author">David de Andrés</string>
-    <string name="about_author_email">ddandres@disca.upv.es</string>
-    <string name="about_copyright">© DADM 2020</string>
+    <string name="about_author">Alejandro Gómez</string>
+    <string name="about_author_email">https://github.com/algono</string>
+    <string name="about_copyright">DADM 2020</string>
     <string name="about_image_content_description">Author photo</string>
 
     <string name="favourite_title">Favourite quotations</string>
