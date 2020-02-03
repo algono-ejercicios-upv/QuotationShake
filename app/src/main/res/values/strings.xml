@@ -4,4 +4,17 @@
     <string name="favourite_option">Favourite Quotations</string>
     <string name="settings_option">Settings</string>
     <string name="about_option">About</string>
+
+    <string name="settings_name_label">Name that identifies the user</string>
+    <string name="settings_name_hint">Insert your name</string>
+    <string name="settings_language_label">Quotations will be received in the selected language</string>
+    <string name="settings_http_method_label">Web requests will be performed using the selected HTTP method</string>
+    <string name="settings_http_method_get">GET</string>
+    <string name="settings_http_method_post">POST</string>
+
+    <string name="about_app_name">QUOTATIONSHAKE by</string>
+    <string name="about_author">David de Andrés</string>
+    <string name="about_author_email">ddandres@disca.upv.es</string>
+    <string name="about_copyright">© DADM 2020</string>
+    <string name="about_image_content_description">Author photo</string>
 </resources>
