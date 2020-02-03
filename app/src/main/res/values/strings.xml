@@ -14,10 +14,7 @@
     <string name="settings_http_method_post">POST</string>
 
     <string name="about_title">About</string>
-    <string name="about_app_name">QUOTATIONSHAKE by</string>
-    <string name="about_author">Alejandro Gómez</string>
-    <string name="about_author_email">https://github.com/algono</string>
-    <string name="about_copyright">DADM 2020</string>
+    <string name="about_data">Quotation Shake by\n\nAlejandro Gomez\n\nhttps://github.com/algono\n\n2020</string>
     <string name="about_image_content_description">Author photo</string>
 
     <string name="favourite_title">Favourite quotations</string>
