@@ -24,8 +24,8 @@
     <string name="favourite_author_info">Author info</string>
 
     <string name="random_title">Random quotations</string>
-    <string name="random_hello">Hello Nameless One!</string>
-    <string name="random_hello_refresh">Press refresh to get a new quotation!</string>
+    <string name="random_hello">Hello Nameless One! Press refresh to get a new quotation!</string>
     <string name="random_sample_quote">This is a sample quote</string>
     <string name="random_sample_author">This is a sample author</string>
+    <string name="random_refresh_button_content_description">Press to get a random quotation</string>
 </resources>

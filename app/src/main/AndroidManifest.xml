@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".RandomActivity"
+            android:label="@string/random_title" />
+        <activity
             android:name=".FavouriteActivity"
             android:label="@string/favourite_title" />
         <activity
