@@ -15,7 +15,7 @@
 
     <string name="settings_language_label">Quotations will be received in the selected language</string>
     <string name="settings_language_eng">English</string>
-    <string name="settings_language_es">Spanish</string>
+    <string name="settings_language_rus">Russian</string>
 
     <string name="settings_http_method_label">Web requests will be performed using the selected HTTP method</string>
     <string name="settings_http_method_get" translatable="false">GET</string>

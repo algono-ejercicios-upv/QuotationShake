@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="languages">
+    <array name="languages">
         <item>@string/settings_language_eng</item>
-        <item>@string/settings_language_es</item>
-    </string-array>
+        <item>@string/settings_language_rus</item>
+    </array>
 </resources>

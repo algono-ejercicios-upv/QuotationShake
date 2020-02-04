@@ -17,7 +17,7 @@ public class RandomActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textViewRandomQuote);
         textView.setText(
-                textView.getText().toString().replace(USERNAME_PLACEHOLDER,
+                getString(R.string.random_hello).replace(USERNAME_PLACEHOLDER,
                         getString(R.string.random_default_username)));
     }
 
