@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RandomActivity extends AppCompatActivity {
 
-    private static final String USERNAME_PLACEHOLDER = "%1s", DEFAULT_USERNAME = "Nameless One";
+    private static final String USERNAME_PLACEHOLDER = "%1s";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,8 @@ public class RandomActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.textViewRandomQuote);
         textView.setText(
-                textView.getText().toString().replace(USERNAME_PLACEHOLDER, DEFAULT_USERNAME));
+                textView.getText().toString().replace(USERNAME_PLACEHOLDER,
+                        getString(R.string.random_default_username)));
     }
 
     public void onRandomQuote(View view) {

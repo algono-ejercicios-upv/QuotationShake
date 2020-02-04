@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_data">Quotation Shake por Alejandro Gómez\n\nhttps://github.com/algono\n\n2020</string>
+    <string name="about_image_content_description">El icono de la app</string>
+    <string name="about_option">Acerca de</string>
+    <string name="about_title">Acerca de</string>
+    <string name="favourite_author_info">Info del autor</string>
+    <string name="favourite_option">Citas favoritas</string>
+    <string name="favourite_title">Citas favoritas</string>
+    <string name="get_option">Obtener citas</string>
+    <string name="random_hello">¡Hola %1s!\n¡Pulsa refrescar para obtener una nueva cita!</string>
+    <string name="random_refresh_button_content_description">Pulsa para obtener una cita aleatoria</string>
+    <string name="random_sample_author">Este es un autor de muestra</string>
+    <string name="random_sample_quote">Esta es una cita de muestra</string>
+    <string name="random_title">Citas aleatorias</string>
+    <string name="settings_http_method_label">Las peticiones web serán realizadas mediante el método HTTP seleccionado</string>
+    <string name="settings_language_label">Las citas serán obtenidas en el lenguaje seleccionado</string>
+    <string name="settings_name_hint">Inserta tu nombre</string>
+    <string name="settings_name_label">Nombre que identifique al usuario</string>
+    <string name="settings_option">Ajustes</string>
+    <string name="settings_title">Ajustes</string>
+    <string name="random_default_username">Usuario sin nombre</string>
+    <string name="settings_language_eng">Inglés</string>
+    <string name="settings_language_es">Español</string>
+</resources>

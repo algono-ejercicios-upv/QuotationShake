@@ -1,28 +1,43 @@
 <resources>
-    <string name="app_name">QuotationShake</string>
+    <string name="app_name" translatable="false">QuotationShake</string>
+
+
     <string name="get_option">Get Quotations</string>
     <string name="favourite_option">Favourite Quotations</string>
     <string name="settings_option">Settings</string>
     <string name="about_option">About</string>
 
+
     <string name="settings_title">Settings</string>
+
     <string name="settings_name_label">Name that identifies the user</string>
     <string name="settings_name_hint">Insert your name</string>
+
     <string name="settings_language_label">Quotations will be received in the selected language</string>
+    <string name="settings_language_eng">English</string>
+    <string name="settings_language_es">Spanish</string>
+
     <string name="settings_http_method_label">Web requests will be performed using the selected HTTP method</string>
-    <string name="settings_http_method_get">GET</string>
-    <string name="settings_http_method_post">POST</string>
+    <string name="settings_http_method_get" translatable="false">GET</string>
+    <string name="settings_http_method_post" translatable="false">POST</string>
+
 
     <string name="about_title">About</string>
     <string name="about_data">Quotation Shake by\n\nAlejandro Gomez\n\nhttps://github.com/algono\n\n2020</string>
-    <string name="about_image_content_description">An image of the app</string>
+    <string name="about_image_content_description">The app\'s icon</string>
+
 
     <string name="favourite_title">Favourite quotations</string>
     <string name="favourite_author_info">Author info</string>
 
+
     <string name="random_title">Random quotations</string>
+
     <string name="random_hello">Hello %1s!\nPress refresh to get a new quotation!</string>
+    <string name="random_default_username">Nameless One</string>
+
     <string name="random_sample_quote">This is a sample quotation</string>
     <string name="random_sample_author">This is a sample author</string>
+
     <string name="random_refresh_button_content_description">Press to get a random quotation</string>
 </resources>
