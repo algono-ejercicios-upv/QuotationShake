@@ -36,4 +36,7 @@
     <string name="random_sample_quote">Esta es una cita de muestra</string>
 
     <string name="random_refresh_button_content_description">Pulsa para obtener una cita aleatoria</string>
+    <string name="exception_anonymous_author">El author es anónimo.\nInformación no disponible.</string>
+    <string name="exception_unsupported_encoding_author">El nombre del autor no fue reconocido.\nInformación no disponible.</string>
+    <string name="author_anonymous">Anónimo</string>
 </resources>

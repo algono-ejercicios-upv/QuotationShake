@@ -1,9 +1,14 @@
 package labs.dadm.quotationshake.Model;
 
-public class Quotation {
-    private String quoteText, quoteAuthor;
+import androidx.annotation.Nullable;
 
-    public Quotation(String quoteText, String quoteAuthor) {
+public class Quotation {
+    private String quoteText;
+
+    @Nullable
+    private String quoteAuthor;
+
+    public Quotation(String quoteText, @Nullable String quoteAuthor) {
         this.quoteText = quoteText;
         this.quoteAuthor = quoteAuthor;
     }
@@ -16,11 +21,20 @@ public class Quotation {
         this.quoteText = quoteText;
     }
 
+    @Nullable
     public String getQuoteAuthor() {
         return quoteAuthor;
     }
 
-    public void setQuoteAuthor(String quoteAuthor) {
+    public void setQuoteAuthor(@Nullable String quoteAuthor) {
         this.quoteAuthor = quoteAuthor;
+    }
+
+    public String getQuoteAuthorOrDefault(String defaultValue) {
+        return isAuthorAnonymous() ? defaultValue : quoteAuthor;
+    }
+
+    public boolean isAuthorAnonymous() {
+        return quoteAuthor == null || quoteAuthor.isEmpty();
     }
 }

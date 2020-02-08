@@ -30,6 +30,11 @@
     <string name="favourite_title">Favourite quotations</string>
     <string name="favourite_author_info">Author info</string>
 
+    <string name="author_anonymous">Anonymous</string>
+
+    <string name="exception_anonymous_author">The author is anonymous.\nInfo not available.</string>
+    <string name="exception_unsupported_encoding_author">The author\'s name was not recognised.\nInfo not available.</string>
+
 
     <string name="random_title">Random quotations</string>
 
