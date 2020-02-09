@@ -16,11 +16,13 @@ import labs.dadm.quotationshake.R;
 public class QuotationAdapter extends RecyclerView.Adapter<QuotationAdapter.ViewHolder> {
 
     private List<Quotation> quotationList;
-    private OnItemClickListener listener;
+    private OnItemClickListener itemClickListener;
+    private OnItemLongClickListener longClickListener;
 
-    public QuotationAdapter(List<Quotation> quotationList, OnItemClickListener listener) {
+    public QuotationAdapter(List<Quotation> quotationList, OnItemClickListener itemClickListener, OnItemLongClickListener longClickListener) {
         this.quotationList = quotationList;
-        this.listener = listener;
+        this.itemClickListener = itemClickListener;
+        this.longClickListener = longClickListener;
     }
 
     @NonNull
@@ -53,8 +55,17 @@ public class QuotationAdapter extends RecyclerView.Adapter<QuotationAdapter.View
         return quotationList.get(position);
     }
 
+    public void removeQuotationAt(int position) {
+        quotationList.remove(position);
+        notifyItemRemoved(position);
+    }
+
     public interface OnItemClickListener {
         void onItemClickListener(QuotationAdapter adapter, int position);
+    }
+
+    public interface OnItemLongClickListener {
+        boolean onItemLongClickListener(QuotationAdapter adapter, int position);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,7 +79,14 @@ public class QuotationAdapter extends RecyclerView.Adapter<QuotationAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onItemClickListener(QuotationAdapter.this, getAdapterPosition());
+                    itemClickListener.onItemClickListener(QuotationAdapter.this, getAdapterPosition());
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    return longClickListener.onItemLongClickListener(QuotationAdapter.this, getAdapterPosition());
                 }
             });
         }

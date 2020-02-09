@@ -1,10 +1,12 @@
 package labs.dadm.quotationshake;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,11 +35,27 @@ public class FavouriteActivity extends AppCompatActivity {
                 try {
                     displayAuthorInfo(adapter.getQuotationAt(position));
                 } catch (IllegalArgumentException ex) {
-                    Toast.makeText(getBaseContext(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FavouriteActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 } catch (UnsupportedEncodingException ex) {
-                    Toast.makeText(getBaseContext(), R.string.exception_unsupported_encoding_author,
+                    Toast.makeText(FavouriteActivity.this, R.string.exception_unsupported_encoding_author,
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        }, new QuotationAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClickListener(final QuotationAdapter adapter, final int position) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(FavouriteActivity.this);
+                dialogBuilder.setMessage(R.string.confirmation_delete_quotation);
+                dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adapter.removeQuotationAt(position);
+                    }
+                });
+                dialogBuilder.setNegativeButton(R.string.confirmation_no, null);
+
+                dialogBuilder.show();
+                return true;
             }
         });
 

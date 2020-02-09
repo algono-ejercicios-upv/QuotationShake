@@ -39,4 +39,7 @@
     <string name="exception_anonymous_author">El author es anónimo.\nInformación no disponible.</string>
     <string name="exception_unsupported_encoding_author">El nombre del autor no fue reconocido.\nInformación no disponible.</string>
     <string name="author_anonymous">Anónimo</string>
+    <string name="confirmation_delete_quotation">¿Estás seguro de que deseas eliminar esta cita?</string>
+    <string name="confirmation_no">No</string>
+    <string name="confirmation_yes">Sí</string>
 </resources>

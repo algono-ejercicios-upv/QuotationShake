@@ -30,6 +30,10 @@
     <string name="favourite_title">Favourite quotations</string>
     <string name="favourite_author_info">Author info</string>
 
+    <string name="confirmation_delete_quotation">Are you sure that you want to delete this quotation?</string>
+    <string name="confirmation_yes">Yes</string>
+    <string name="confirmation_no">No</string>
+
     <string name="author_anonymous">Anonymous</string>
 
     <string name="exception_anonymous_author">The author is anonymous.\nInfo not available.</string>
