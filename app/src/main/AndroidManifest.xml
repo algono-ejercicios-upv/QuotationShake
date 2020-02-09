@@ -11,16 +11,36 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".RandomActivity"
-            android:label="@string/random_title" />
+            android:label="@string/random_title"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".FavouriteActivity"
-            android:label="@string/favourite_title" />
+            android:label="@string/favourite_title"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".AboutActivity"
-            android:label="@string/about_title" />
+            android:label="@string/about_title"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/settings_title" />
+            android:label="@string/settings_title"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
