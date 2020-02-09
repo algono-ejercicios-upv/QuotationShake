@@ -40,13 +40,13 @@
     <string name="exception_unsupported_encoding_author">The author\'s name was not recognised.\nInfo not available.</string>
 
 
-    <string name="random_title">Random quotations</string>
+    <string name="quotation_title">Random quotations</string>
 
-    <string name="random_hello">Hello %1s!\nPress refresh to get a new quotation!</string>
-    <string name="random_default_username">Nameless One</string>
+    <string name="quotation_hello">Hello %1s!\nPress refresh to get a new quotation!</string>
+    <string name="quotation_default_username">Nameless One</string>
 
-    <string name="random_sample_quote">This is a sample quotation</string>
-    <string name="random_sample_author">This is a sample author</string>
+    <string name="quotation_sample_quote">This is a sample quotation</string>
+    <string name="quotation_sample_author">This is a sample author</string>
 
-    <string name="random_refresh_button_content_description">Press to get a random quotation</string>
+    <string name="quotation_refresh_button_content_description">Press to get a random quotation</string>
 </resources>

@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private static SparseArray<Class> createNavButtonIdMap() {
         SparseArray<Class> navButtonIdMap = new SparseArray<>();
 
-        navButtonIdMap.append(R.id.button_goto_get, RandomActivity.class);
+        navButtonIdMap.append(R.id.button_goto_get, QuotationActivity.class);
         navButtonIdMap.append(R.id.button_goto_about, AboutActivity.class);
         navButtonIdMap.append(R.id.button_goto_favourite, FavouriteActivity.class);
         navButtonIdMap.append(R.id.button_goto_settings, SettingsActivity.class);

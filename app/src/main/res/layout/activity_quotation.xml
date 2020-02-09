@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RandomActivity">
+    tools:context=".QuotationActivity">
 
     <ProgressBar
         android:id="@+id/progressBarRandomQuote"
@@ -30,7 +30,7 @@
             android:id="@+id/textViewRandomQuote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/random_hello"
+            android:text="@string/quotation_hello"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
     </ScrollView>
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:contentDescription="@string/random_refresh_button_content_description"
+        android:contentDescription="@string/quotation_refresh_button_content_description"
         android:onClick="onRandomQuote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

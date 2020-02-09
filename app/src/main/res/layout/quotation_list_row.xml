@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewQuoteAuthor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/random_sample_quote" />
+        tools:text="@string/quotation_sample_quote" />
 
     <TextView
         android:id="@+id/textViewQuoteAuthor"
@@ -29,5 +29,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewQuoteText"
-        tools:text="@string/random_sample_author" />
+        tools:text="@string/quotation_sample_author" />
 </androidx.constraintlayout.widget.ConstraintLayout>

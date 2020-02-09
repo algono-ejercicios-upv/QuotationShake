@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".RandomActivity"
-            android:label="@string/random_title"
+            android:name=".QuotationActivity"
+            android:label="@string/quotation_title"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -6,19 +6,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RandomActivity extends AppCompatActivity {
+public class QuotationActivity extends AppCompatActivity {
 
     private static final String USERNAME_PLACEHOLDER = "%1s";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_random);
+        setContentView(R.layout.activity_quotation);
 
         TextView textView = findViewById(R.id.textViewRandomQuote);
         textView.setText(
-                getString(R.string.random_hello).replace(USERNAME_PLACEHOLDER,
-                        getString(R.string.random_default_username)));
+                getString(R.string.quotation_hello).replace(USERNAME_PLACEHOLDER,
+                        getString(R.string.quotation_default_username)));
     }
 
     public void onRandomQuote(View view) {
@@ -27,8 +27,8 @@ public class RandomActivity extends AppCompatActivity {
         TextView randomQuoteTextView = findViewById(R.id.textViewRandomQuote);
         TextView randomAuthorTextView = findViewById(R.id.textViewRandomAuthor);
 
-        randomQuoteTextView.setText(R.string.random_sample_quote);
-        randomAuthorTextView.setText(R.string.random_sample_author);
+        randomQuoteTextView.setText(R.string.quotation_sample_quote);
+        randomAuthorTextView.setText(R.string.quotation_sample_author);
 
         onEndFetchingRandomQuote();
     }
