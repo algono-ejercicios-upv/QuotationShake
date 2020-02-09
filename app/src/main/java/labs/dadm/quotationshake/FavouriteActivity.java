@@ -4,8 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -23,13 +26,15 @@ public class FavouriteActivity extends AppCompatActivity {
 
     private static final String WIKI_SEARCH_URL = "https://en.wikipedia.org/wiki/Special:Search?search=";
 
+    private QuotationAdapter quotationAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
 
         ArrayList<Quotation> myMockQuotations = getMockQuotations();
-        final QuotationAdapter quotationAdapter = new QuotationAdapter(myMockQuotations, new QuotationAdapter.OnItemClickListener() {
+        quotationAdapter = new QuotationAdapter(myMockQuotations, new QuotationAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(QuotationAdapter adapter, int position) {
                 try {
@@ -63,6 +68,37 @@ public class FavouriteActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(quotationAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.favourite_menu, menu);
+        if (quotationAdapter.getItemCount() == 0) {
+            menu.findItem(R.id.clearAllQuotationsMenuItem).setVisible(false);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.clearAllQuotationsMenuItem:
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(FavouriteActivity.this);
+                dialogBuilder.setMessage(R.string.confirmation_clear_all_quotations);
+                dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        quotationAdapter.clearAllQuotations();
+                        item.setVisible(false);
+                    }
+                });
+                dialogBuilder.setNegativeButton(R.string.confirmation_no, null);
+
+                dialogBuilder.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void displayAuthorInfo(Quotation quotation) throws IllegalArgumentException, UnsupportedEncodingException {

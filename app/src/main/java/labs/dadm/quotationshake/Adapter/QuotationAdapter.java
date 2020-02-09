@@ -60,6 +60,11 @@ public class QuotationAdapter extends RecyclerView.Adapter<QuotationAdapter.View
         notifyItemRemoved(position);
     }
 
+    public void clearAllQuotations() {
+        quotationList.clear();
+        notifyDataSetChanged();
+    }
+
     public interface OnItemClickListener {
         void onItemClickListener(QuotationAdapter adapter, int position);
     }

@@ -44,4 +44,6 @@
     <string name="confirmation_yes">Sí</string>
     <string name="quotation_menu_add_item">Añadir</string>
     <string name="quotation_menu_refresh_item">Actualizar</string>
+    <string name="favourite_menu_clear_all">Borrar Todo</string>
+    <string name="confirmation_clear_all_quotations">¿Estás seguro de que deseas eliminar TODAS tus citas favoritas?</string>
 </resources>
