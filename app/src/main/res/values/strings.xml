@@ -49,4 +49,7 @@
     <string name="quotation_sample_author">This is a sample author</string>
 
     <string name="quotation_refresh_button_content_description">Press to get a random quotation</string>
+
+    <string name="quotation_menu_add_item">Add</string>
+    <string name="quotation_menu_refresh_item">Refresh</string>
 </resources>

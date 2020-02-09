@@ -42,4 +42,6 @@
     <string name="confirmation_delete_quotation">¿Estás seguro de que deseas eliminar esta cita?</string>
     <string name="confirmation_no">No</string>
     <string name="confirmation_yes">Sí</string>
+    <string name="quotation_menu_add_item">Añadir</string>
+    <string name="quotation_menu_refresh_item">Actualizar</string>
 </resources>

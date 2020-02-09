@@ -1,9 +1,12 @@
 package labs.dadm.quotationshake;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class QuotationActivity extends AppCompatActivity {
@@ -21,7 +24,27 @@ public class QuotationActivity extends AppCompatActivity {
                         getString(R.string.quotation_default_username)));
     }
 
-    public void onRandomQuote(View view) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.quotation_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.addQuotationToFavouritesMenuItem:
+                // TODO: Add quotation to favourites
+                return true;
+            case R.id.getNewQuotationMenuItem:
+                fetchRandomQuotation();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void fetchRandomQuotation() {
         onStartFetchingRandomQuote();
 
         TextView randomQuoteTextView = findViewById(R.id.textViewRandomQuote);

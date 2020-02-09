@@ -35,18 +35,6 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
     </ScrollView>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/quotation_refresh_button_content_description"
-        android:onClick="onRandomQuote"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_rotate" />
-
     <TextView
         android:id="@+id/textViewRandomAuthor"
         android:layout_width="wrap_content"
