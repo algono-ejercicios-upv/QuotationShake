@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".DashboardActivity">
 
     <Button
         android:id="@+id/button_goto_get"
@@ -12,49 +12,46 @@
         android:layout_height="0dp"
         android:onClick="onNavigationButtonPressed"
         android:text="@string/get_option"
-        app:layout_constraintBottom_toTopOf="@+id/button_goto_favourite"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_goto_settings"
+        app:layout_constraintEnd_toStartOf="@+id/button_goto_favourite"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_goto_favourite"
+        android:id="@+id/button_goto_settings"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:onClick="onNavigationButtonPressed"
-        android:text="@string/favourite_option"
-        app:layout_constraintBottom_toTopOf="@+id/button_goto_settings"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/settings_option"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_goto_about"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_goto_get" />
 
     <Button
-        android:id="@+id/button_goto_settings"
+        android:id="@+id/button_goto_favourite"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:onClick="onNavigationButtonPressed"
-        android:text="@string/settings_option"
+        android:text="@string/favourite_option"
         app:layout_constraintBottom_toTopOf="@+id/button_goto_about"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_goto_favourite" />
+        app:layout_constraintStart_toEndOf="@+id/button_goto_get"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_goto_about"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:onClick="onNavigationButtonPressed"
         android:text="@string/about_option"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_goto_settings" />
+        app:layout_constraintStart_toEndOf="@+id/button_goto_settings"
+        app:layout_constraintTop_toBottomOf="@+id/button_goto_favourite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

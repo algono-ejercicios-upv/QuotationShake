@@ -12,37 +12,37 @@
         <activity
             android:name=".QuotationActivity"
             android:label="@string/quotation_title"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".DashboardActivity" />
         </activity>
         <activity
             android:name=".FavouriteActivity"
             android:label="@string/favourite_title"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".DashboardActivity" />
         </activity>
         <activity
             android:name=".AboutActivity"
             android:label="@string/about_title"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".DashboardActivity" />
         </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/settings_title"
             android:theme="@style/AppTheme.Settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".DashboardActivity" />
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
