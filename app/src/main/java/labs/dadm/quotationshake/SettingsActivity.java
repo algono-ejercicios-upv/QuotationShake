@@ -2,7 +2,7 @@ package labs.dadm.quotationshake;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
