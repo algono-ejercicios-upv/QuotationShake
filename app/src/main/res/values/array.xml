@@ -4,4 +4,8 @@
         <item>@string/settings_language_eng</item>
         <item>@string/settings_language_rus</item>
     </array>
+    <array name="http_methods">
+        <item>@string/settings_http_method_get</item>
+        <item>@string/settings_http_method_post</item>
+    </array>
 </resources>
