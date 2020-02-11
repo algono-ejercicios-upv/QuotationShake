@@ -1,6 +1,7 @@
 package labs.dadm.quotationshake;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +20,10 @@ public class QuotationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quotation);
 
         TextView textView = findViewById(R.id.textViewRandomQuote);
+        String username = PreferenceManager.getDefaultSharedPreferences(this).getString(SettingsActivity.USERNAME_KEY, getString(R.string.quotation_default_username));
         textView.setText(
                 getString(R.string.quotation_hello).replace(USERNAME_PLACEHOLDER,
-                        getString(R.string.quotation_default_username)));
+                        username));
     }
 
     @Override
