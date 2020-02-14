@@ -2,7 +2,9 @@ package labs.dadm.quotationshake.Model;
 
 import androidx.annotation.Nullable;
 
-public class Quotation {
+import java.io.Serializable;
+
+public class Quotation implements Serializable {
     private String quoteText;
 
     @Nullable

@@ -32,8 +32,7 @@
     <string name="quotation_hello">¡Hola %1s!\n¡Pulsa refrescar para obtener una nueva cita!</string>
     <string name="quotation_default_username">Usuario sin nombre</string>
 
-    <string name="quotation_sample_author">Este es un autor de muestra</string>
-    <string name="quotation_sample_quote">Esta es una cita de muestra</string>
+    <string name="quotation_sample_author">Autor de muestra %1$d</string>
 
     <string name="quotation_refresh_button_content_description">Pulsa para obtener una cita aleatoria</string>
     <string name="exception_anonymous_author">El author es anónimo.\nInformación no disponible.</string>
@@ -46,4 +45,5 @@
     <string name="quotation_menu_refresh_item">Actualizar</string>
     <string name="favourite_menu_clear_all">Borrar Todo</string>
     <string name="confirmation_clear_all_quotations">¿Estás seguro de que deseas eliminar TODAS tus citas favoritas?</string>
+    <string name="quotation_sample_quote">Cita de muestra %1$d</string>
 </resources>
