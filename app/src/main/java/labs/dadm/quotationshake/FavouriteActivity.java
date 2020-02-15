@@ -20,6 +20,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import labs.dadm.quotationshake.Adapter.QuotationAdapter;
+import labs.dadm.quotationshake.Databases.QuotationSQLiteOpenHelper;
 import labs.dadm.quotationshake.Model.Quotation;
 
 public class FavouriteActivity extends AppCompatActivity {
@@ -33,7 +34,8 @@ public class FavouriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
 
-        ArrayList<Quotation> myMockQuotations = getMockQuotations();
+        ArrayList<Quotation> myMockQuotations = QuotationSQLiteOpenHelper
+                .getInstance(this).getAllQuotations();
         quotationAdapter = new QuotationAdapter(myMockQuotations, new QuotationAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(QuotationAdapter adapter, int position) {
@@ -54,6 +56,8 @@ public class FavouriteActivity extends AppCompatActivity {
                 dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        QuotationSQLiteOpenHelper.getInstance(FavouriteActivity.this)
+                                .removeQuotation(adapter.getQuotationAt(position));
                         adapter.removeQuotationAt(position);
                     }
                 });
@@ -88,6 +92,8 @@ public class FavouriteActivity extends AppCompatActivity {
                 dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        QuotationSQLiteOpenHelper.getInstance(FavouriteActivity.this)
+                                .clearQuotations();
                         quotationAdapter.clearAllQuotations();
                         item.setVisible(false);
                     }

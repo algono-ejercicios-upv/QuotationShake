@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import labs.dadm.quotationshake.Databases.QuotationSQLiteOpenHelper;
 import labs.dadm.quotationshake.Model.Quotation;
 
 public class QuotationActivity extends AppCompatActivity {
@@ -83,13 +84,14 @@ public class QuotationActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addQuotationToFavouritesMenuItem:
-                // TODO: Add quotation to favourites
+                QuotationSQLiteOpenHelper.getInstance(this).addQuotation(currentQuotation);
                 addQuotationToFavouritesVisible = false;
                 supportInvalidateOptionsMenu();
                 return true;
             case R.id.getNewQuotationMenuItem:
                 fetchRandomQuotation();
-                addQuotationToFavouritesVisible = true;
+                addQuotationToFavouritesVisible = !(QuotationSQLiteOpenHelper.getInstance(this)
+                        .quotationExists(currentQuotation));
                 supportInvalidateOptionsMenu();
                 return true;
             default:
@@ -106,12 +108,15 @@ public class QuotationActivity extends AppCompatActivity {
         String nextQuote = getString(R.string.quotation_sample_quote);
         String nextAuthor = getString(R.string.quotation_sample_author);
 
-        currentQuotation = new Quotation(nextQuote, nextAuthor);
-
         numberOfQuotationsReceived++;
 
-        randomQuoteTextView.setText(replaceQuotationNumber(nextQuote));
-        randomAuthorTextView.setText(replaceQuotationNumber(nextAuthor));
+        String currentQuote = replaceQuotationNumber(nextQuote);
+        String currentAuthor = replaceQuotationNumber(nextAuthor);
+
+        currentQuotation = new Quotation(currentQuote, currentAuthor);
+
+        randomQuoteTextView.setText(currentQuote);
+        randomAuthorTextView.setText(currentAuthor);
 
         onEndFetchingRandomQuote();
     }
