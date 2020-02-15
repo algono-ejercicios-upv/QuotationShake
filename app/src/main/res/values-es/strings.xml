@@ -46,4 +46,6 @@
     <string name="favourite_menu_clear_all">Borrar Todo</string>
     <string name="confirmation_clear_all_quotations">¿Estás seguro de que deseas eliminar TODAS tus citas favoritas?</string>
     <string name="quotation_sample_quote">Cita de muestra %1$d</string>
+    <string name="settings_database_section_title">Bases de datos</string>
+    <string name="settings_database_label">Se utilizará el siguiente proveedor de acceso a base de datos</string>
 </resources>

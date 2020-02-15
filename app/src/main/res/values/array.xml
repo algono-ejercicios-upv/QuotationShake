@@ -8,4 +8,8 @@
         <item>@string/settings_http_method_get</item>
         <item>@string/settings_http_method_post</item>
     </array>
+    <array name="databases">
+        <item>@string/settings_database_room</item>
+        <item>@string/settings_database_helper</item>
+    </array>
 </resources>

@@ -21,6 +21,11 @@
     <string name="settings_http_method_get" translatable="false">GET</string>
     <string name="settings_http_method_post" translatable="false">POST</string>
 
+    <string name="settings_database_section_title">Databases</string>
+    <string name="settings_database_label">The following database access provider will be used</string>
+    <string name="settings_database_room" translatable="false">Room</string>
+    <string name="settings_database_helper" translatable="false">SQLiteOpenHelper</string>
+
 
     <string name="about_title">About</string>
     <string name="about_data">Quotation Shake by\n\nAlejandro Gomez\n\nhttps://github.com/algono\n\n2020</string>

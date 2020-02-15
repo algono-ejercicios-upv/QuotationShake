@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-import labs.dadm.quotationshake.Databases.QuotationSQLiteOpenHelper;
+import labs.dadm.quotationshake.Databases.DatabaseProviders;
 import labs.dadm.quotationshake.Model.Quotation;
 
 public class QuotationActivity extends AppCompatActivity {
@@ -84,14 +84,14 @@ public class QuotationActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addQuotationToFavouritesMenuItem:
-                QuotationSQLiteOpenHelper.getInstance(this).addQuotation(currentQuotation);
+                DatabaseProviders.getCurrentProvider(this).addQuotation(currentQuotation);
                 addQuotationToFavouritesVisible = false;
                 supportInvalidateOptionsMenu();
                 return true;
             case R.id.getNewQuotationMenuItem:
                 fetchRandomQuotation();
-                addQuotationToFavouritesVisible = !(QuotationSQLiteOpenHelper.getInstance(this)
-                        .quotationExists(currentQuotation));
+                addQuotationToFavouritesVisible = DatabaseProviders.getCurrentProvider(this)
+                        .getQuotationByText(currentQuotation.getQuoteText()) == null;
                 supportInvalidateOptionsMenu();
                 return true;
             default:

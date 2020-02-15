@@ -7,13 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import labs.dadm.quotationshake.Model.Quotation;
 
 import static labs.dadm.quotationshake.Databases.QuotationContract.QuotationBaseColumns;
 
-public class QuotationSQLiteOpenHelper extends SQLiteOpenHelper {
-
+public class QuotationSQLiteOpenHelper extends SQLiteOpenHelper implements DatabaseProvider {
     private static final String databaseName = "quotation_database";
 
     private static QuotationSQLiteOpenHelper instance;
@@ -50,7 +50,7 @@ public class QuotationSQLiteOpenHelper extends SQLiteOpenHelper {
         // Empty on purpose
     }
 
-    public ArrayList<Quotation> getAllQuotations() {
+    public List<Quotation> getAllQuotations() {
         ArrayList<Quotation> quotationList = new ArrayList<>();
         try (SQLiteDatabase database = getReadableDatabase()) {
             try (Cursor quotationCursor = database.query(QuotationBaseColumns.tableName,
@@ -65,6 +65,22 @@ public class QuotationSQLiteOpenHelper extends SQLiteOpenHelper {
             }
         }
         return quotationList;
+    }
+
+    public Quotation getQuotationByText(String quoteText) {
+        try (SQLiteDatabase database = getReadableDatabase()) {
+            try (Cursor quotationCursor = database.query(QuotationBaseColumns.tableName,
+                    new String[]{QuotationBaseColumns.columnName_quoteText,
+                            QuotationBaseColumns.columnName_authorName},
+                    String.format("%s=?", QuotationBaseColumns.columnName_quoteText),
+                    new String[]{quoteText},
+                    null, null, null)) {
+                quotationCursor.moveToFirst();
+                String databaseQuoteText = quotationCursor.getString(0);
+                String quoteAuthor = quotationCursor.getString(1);
+                return new Quotation(databaseQuoteText, quoteAuthor);
+            }
+        }
     }
 
     public boolean quotationExists(Quotation quotation) {

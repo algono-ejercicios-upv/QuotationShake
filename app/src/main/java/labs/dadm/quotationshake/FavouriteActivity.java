@@ -18,9 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 import labs.dadm.quotationshake.Adapter.QuotationAdapter;
-import labs.dadm.quotationshake.Databases.QuotationSQLiteOpenHelper;
+import labs.dadm.quotationshake.Databases.DatabaseProviders;
 import labs.dadm.quotationshake.Model.Quotation;
 
 public class FavouriteActivity extends AppCompatActivity {
@@ -34,9 +35,9 @@ public class FavouriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
 
-        ArrayList<Quotation> myMockQuotations = QuotationSQLiteOpenHelper
-                .getInstance(this).getAllQuotations();
-        quotationAdapter = new QuotationAdapter(myMockQuotations, new QuotationAdapter.OnItemClickListener() {
+        List<Quotation> quotationList = DatabaseProviders
+                .getCurrentProvider(this).getAllQuotations();
+        quotationAdapter = new QuotationAdapter(quotationList, new QuotationAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(QuotationAdapter adapter, int position) {
                 try {
@@ -56,7 +57,7 @@ public class FavouriteActivity extends AppCompatActivity {
                 dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        QuotationSQLiteOpenHelper.getInstance(FavouriteActivity.this)
+                        DatabaseProviders.getCurrentProvider(FavouriteActivity.this)
                                 .removeQuotation(adapter.getQuotationAt(position));
                         adapter.removeQuotationAt(position);
                     }
@@ -92,7 +93,7 @@ public class FavouriteActivity extends AppCompatActivity {
                 dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        QuotationSQLiteOpenHelper.getInstance(FavouriteActivity.this)
+                        DatabaseProviders.getCurrentProvider(FavouriteActivity.this)
                                 .clearQuotations();
                         quotationAdapter.clearAllQuotations();
                         item.setVisible(false);
