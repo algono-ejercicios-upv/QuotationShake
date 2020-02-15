@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +69,7 @@ public class QuotationSQLiteOpenHelper extends SQLiteOpenHelper implements Datab
         return quotationList;
     }
 
+    @Nullable
     public Quotation getQuotationByText(String quoteText) {
         try (SQLiteDatabase database = getReadableDatabase()) {
             try (Cursor quotationCursor = database.query(QuotationBaseColumns.tableName,
@@ -75,10 +78,14 @@ public class QuotationSQLiteOpenHelper extends SQLiteOpenHelper implements Datab
                     String.format("%s=?", QuotationBaseColumns.columnName_quoteText),
                     new String[]{quoteText},
                     null, null, null)) {
-                quotationCursor.moveToFirst();
-                String databaseQuoteText = quotationCursor.getString(0);
-                String quoteAuthor = quotationCursor.getString(1);
-                return new Quotation(databaseQuoteText, quoteAuthor);
+                if (quotationCursor.getCount() > 0) {
+                    quotationCursor.moveToFirst();
+                    String databaseQuoteText = quotationCursor.getString(0);
+                    String quoteAuthor = quotationCursor.getString(1);
+                    return new Quotation(databaseQuoteText, quoteAuthor);
+                } else {
+                    return null;
+                }
             }
         }
     }

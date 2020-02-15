@@ -8,7 +8,7 @@ import androidx.preference.PreferenceManager;
 import labs.dadm.quotationshake.R;
 
 public class DatabaseProviders {
-    public static final String DATABASE_KEY = "database";
+    public static final String DATABASE_KEY = "settings_database";
 
     public static synchronized DatabaseProvider getCurrentProvider(Context context) {
         String currentProvider = getCurrentProviderName(context);

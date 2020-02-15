@@ -22,7 +22,7 @@
         <ListPreference
             android:entries="@array/databases"
             android:entryValues="@array/databases"
-            android:key="settings_databases"
+            android:key="settings_database"
             android:title="@string/settings_database_label"
             app:singleLineTitle="false" />
     </PreferenceCategory>

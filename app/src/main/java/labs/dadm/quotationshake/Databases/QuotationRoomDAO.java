@@ -1,5 +1,6 @@
 package labs.dadm.quotationshake.Databases;
 
+import androidx.annotation.Nullable;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -20,6 +21,7 @@ public interface QuotationRoomDAO extends DatabaseProvider {
     @Query("SELECT * FROM quotation_table")
     List<Quotation> getAllQuotations();
 
+    @Nullable
     @Query("SELECT * FROM quotation_table WHERE quote = :quoteText")
     Quotation getQuotationByText(String quoteText);
 
