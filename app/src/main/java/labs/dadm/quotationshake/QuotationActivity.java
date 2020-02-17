@@ -12,6 +12,7 @@ import androidx.preference.PreferenceManager;
 
 import labs.dadm.quotationshake.Databases.DatabaseProviders;
 import labs.dadm.quotationshake.Model.Quotation;
+import labs.dadm.quotationshake.Tasks.QuotationWebServiceAsyncTask;
 
 public class QuotationActivity extends AppCompatActivity {
 
@@ -20,12 +21,11 @@ public class QuotationActivity extends AppCompatActivity {
 
     private static final String
             QUOTATION_KEY = "current_quotation",
-            QUOTATION_NUMBER_KEY = "current_quotation_number",
             ADD_OPTION_VISIBLE_KEY = "add_option_visible";
 
-    private int numberOfQuotationsReceived = 0;
     private Quotation currentQuotation;
-    private boolean addQuotationToFavouritesVisible;
+    private boolean addQuotationToFavouritesVisible = false;
+    private QuotationActivityState state = QuotationActivityState.not_fetched;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +37,34 @@ public class QuotationActivity extends AppCompatActivity {
             showWelcomeMessage(randomQuoteTextView);
         } else {
             currentQuotation = (Quotation) savedInstanceState.getSerializable(QUOTATION_KEY);
-            numberOfQuotationsReceived = savedInstanceState.getInt(QUOTATION_NUMBER_KEY, 0);
             addQuotationToFavouritesVisible = savedInstanceState.getBoolean(ADD_OPTION_VISIBLE_KEY, false);
 
             if (currentQuotation == null) {
                 showWelcomeMessage(randomQuoteTextView);
             } else {
-                randomQuoteTextView.setText(
-                        replaceQuotationNumber(currentQuotation.getQuoteText()));
+                randomQuoteTextView.setText(currentQuotation.getQuoteText());
 
                 String currentAuthor = currentQuotation
-                        .getQuoteAuthorOrDefault(getString(R.string.author_anonymous));
+                        .getQuoteAuthorOrDefault(this);
 
                 TextView randomAuthorTextView = findViewById(R.id.textViewRandomAuthor);
-                randomAuthorTextView.setText(replaceQuotationNumber(currentAuthor));
+                randomAuthorTextView.setText(currentAuthor);
             }
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.quotation_menu, menu);
+        if (state == QuotationActivityState.fetching) {
+            for (int i = 0; i < menu.size(); i++) {
+                menu.getItem(i).setVisible(false);
+            }
+        } else {
+            menu.findItem(R.id.addQuotationToFavouritesMenuItem)
+                    .setVisible(addQuotationToFavouritesVisible);
+        }
+        return true;
     }
 
     private void showWelcomeMessage(TextView randomQuoteTextView) {
@@ -68,16 +80,11 @@ public class QuotationActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(QUOTATION_KEY, currentQuotation);
-        outState.putInt(QUOTATION_NUMBER_KEY, numberOfQuotationsReceived);
         outState.putBoolean(ADD_OPTION_VISIBLE_KEY, addQuotationToFavouritesVisible);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.quotation_menu, menu);
-        menu.findItem(R.id.addQuotationToFavouritesMenuItem)
-                .setVisible(addQuotationToFavouritesVisible);
-        return true;
+    public void fetchRandomQuotation() {
+        new QuotationWebServiceAsyncTask(this).execute();
     }
 
     @Override
@@ -98,53 +105,48 @@ public class QuotationActivity extends AppCompatActivity {
                 return true;
             case R.id.getNewQuotationMenuItem:
                 fetchRandomQuotation();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        addQuotationToFavouritesVisible = DatabaseProviders
-                                .getCurrentProvider(QuotationActivity.this)
-                                .getQuotationByText(currentQuotation.getQuoteText()) == null;
-                        supportInvalidateOptionsMenu();
-                    }
-                }).start();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void fetchRandomQuotation() {
-        onStartFetchingRandomQuote();
+    public void onStartFetchingRandomQuote() {
+        state = QuotationActivityState.fetching;
+        supportInvalidateOptionsMenu();
 
         TextView randomQuoteTextView = findViewById(R.id.textViewRandomQuote);
         TextView randomAuthorTextView = findViewById(R.id.textViewRandomAuthor);
 
-        String nextQuote = getString(R.string.quotation_sample_quote);
-        String nextAuthor = getString(R.string.quotation_sample_author);
+        randomQuoteTextView.setText("");
+        randomAuthorTextView.setText("");
 
-        numberOfQuotationsReceived++;
-
-        String currentQuote = replaceQuotationNumber(nextQuote);
-        String currentAuthor = replaceQuotationNumber(nextAuthor);
-
-        currentQuotation = new Quotation(currentQuote, currentAuthor);
-
-        randomQuoteTextView.setText(currentQuote);
-        randomAuthorTextView.setText(currentAuthor);
-
-        onEndFetchingRandomQuote();
-    }
-
-    private String replaceQuotationNumber(String str) {
-        return str.replace(QUOTATION_NUMBER_PLACEHOLDER,
-                String.valueOf(numberOfQuotationsReceived));
-    }
-
-    private void onStartFetchingRandomQuote() {
         findViewById(R.id.progressBarRandomQuote).setVisibility(View.VISIBLE);
     }
 
-    private void onEndFetchingRandomQuote() {
+    public void onEndFetchingRandomQuote(Quotation randomQuote) {
+        currentQuotation = randomQuote;
+
+        TextView randomQuoteTextView = findViewById(R.id.textViewRandomQuote);
+        TextView randomAuthorTextView = findViewById(R.id.textViewRandomAuthor);
+
         findViewById(R.id.progressBarRandomQuote).setVisibility(View.INVISIBLE);
+
+        randomQuoteTextView.setText(randomQuote.getQuoteText());
+        randomAuthorTextView.setText(
+                randomQuote.getQuoteAuthorOrDefault(this));
+
+        state = QuotationActivityState.fetched;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                addQuotationToFavouritesVisible = DatabaseProviders
+                        .getCurrentProvider(QuotationActivity.this)
+                        .getQuotationByText(currentQuotation.getQuoteText()) == null;
+                supportInvalidateOptionsMenu();
+            }
+        }).start();
     }
+
+    enum QuotationActivityState {not_fetched, fetching, fetched}
 }

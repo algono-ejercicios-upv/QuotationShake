@@ -1,5 +1,7 @@
 package labs.dadm.quotationshake.Model;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
@@ -7,6 +9,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+
+import labs.dadm.quotationshake.R;
 
 @Entity(tableName = "quotation_table")
 public class Quotation implements Serializable {
@@ -54,6 +58,10 @@ public class Quotation implements Serializable {
 
     public void setQuoteAuthor(@Nullable String quoteAuthor) {
         this.quoteAuthor = quoteAuthor;
+    }
+
+    public String getQuoteAuthorOrDefault(Context context) {
+        return getQuoteAuthorOrDefault(context.getString(R.string.author_anonymous));
     }
 
     public String getQuoteAuthorOrDefault(String defaultValue) {
