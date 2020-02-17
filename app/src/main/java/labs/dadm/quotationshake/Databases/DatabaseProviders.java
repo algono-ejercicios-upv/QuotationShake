@@ -35,7 +35,15 @@ public class DatabaseProviders {
         } else if (providerName.equals(helperDatabase)) {
             return getProviderHelper(context);
         } else {
-            return null;
+            throw new IllegalArgumentException("Invalid provider name");
+        }
+    }
+
+    public static synchronized DatabaseProvider getProvider(Context context, boolean useRoom) {
+        if (useRoom) {
+            return getProviderRoom(context);
+        } else {
+            return getProviderHelper(context);
         }
     }
 

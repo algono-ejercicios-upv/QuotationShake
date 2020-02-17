@@ -55,6 +55,11 @@ public class QuotationAdapter extends RecyclerView.Adapter<QuotationAdapter.View
         return quotationList.get(position);
     }
 
+    public void addAllQuotations(List<Quotation> quotationsToAdd) {
+        quotationList.addAll(quotationsToAdd);
+        notifyDataSetChanged();
+    }
+
     public void removeQuotationAt(int position) {
         quotationList.remove(position);
         notifyItemRemoved(position);

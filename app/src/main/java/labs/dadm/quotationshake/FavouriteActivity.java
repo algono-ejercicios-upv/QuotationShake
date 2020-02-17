@@ -23,6 +23,7 @@ import java.util.List;
 import labs.dadm.quotationshake.Adapter.QuotationAdapter;
 import labs.dadm.quotationshake.Databases.DatabaseProviders;
 import labs.dadm.quotationshake.Model.Quotation;
+import labs.dadm.quotationshake.Tasks.FavouriteQuotationDBAsyncTask;
 
 public class FavouriteActivity extends AppCompatActivity {
 
@@ -35,9 +36,7 @@ public class FavouriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
 
-        List<Quotation> quotationList = DatabaseProviders
-                .getCurrentProvider(this).getAllQuotations();
-        quotationAdapter = new QuotationAdapter(quotationList, new QuotationAdapter.OnItemClickListener() {
+        quotationAdapter = new QuotationAdapter(new ArrayList<Quotation>(), new QuotationAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(QuotationAdapter adapter, int position) {
                 try {
@@ -57,8 +56,15 @@ public class FavouriteActivity extends AppCompatActivity {
                 dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        DatabaseProviders.getCurrentProvider(FavouriteActivity.this)
-                                .removeQuotation(adapter.getQuotationAt(position));
+                        final Quotation quotationToRemove = adapter.getQuotationAt(position);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                DatabaseProviders
+                                        .getCurrentProvider(FavouriteActivity.this)
+                                        .removeQuotation(quotationToRemove);
+                            }
+                        }).start();
                         adapter.removeQuotationAt(position);
                     }
                 });
@@ -73,14 +79,24 @@ public class FavouriteActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(quotationAdapter);
+
+        FavouriteQuotationDBAsyncTask getQuotationsFromDBTask
+                = new FavouriteQuotationDBAsyncTask(this);
+        getQuotationsFromDBTask.execute();
+    }
+
+    public void addQuotationsToList(List<Quotation> quotationList) {
+        if (quotationList.size() > 0) {
+            quotationAdapter.addAllQuotations(quotationList);
+            supportInvalidateOptionsMenu();
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.favourite_menu, menu);
-        if (quotationAdapter.getItemCount() == 0) {
-            menu.findItem(R.id.clearAllQuotationsMenuItem).setVisible(false);
-        }
+        menu.findItem(R.id.clearAllQuotationsMenuItem)
+                .setVisible(quotationAdapter.getItemCount() > 0);
         return true;
     }
 
@@ -93,8 +109,14 @@ public class FavouriteActivity extends AppCompatActivity {
                 dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        DatabaseProviders.getCurrentProvider(FavouriteActivity.this)
-                                .clearQuotations();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                DatabaseProviders
+                                        .getCurrentProvider(FavouriteActivity.this)
+                                        .clearQuotations();
+                            }
+                        }).start();
                         quotationAdapter.clearAllQuotations();
                         item.setVisible(false);
                     }

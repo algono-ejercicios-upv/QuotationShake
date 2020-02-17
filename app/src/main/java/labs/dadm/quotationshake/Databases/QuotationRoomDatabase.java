@@ -19,7 +19,6 @@ public abstract class QuotationRoomDatabase extends RoomDatabase {
             instance = Room.databaseBuilder(context,
                     QuotationRoomDatabase.class,
                     databaseName)
-                    .allowMainThreadQueries() // TODO: Delete this after implementing threading
                     .build();
         }
         return instance;

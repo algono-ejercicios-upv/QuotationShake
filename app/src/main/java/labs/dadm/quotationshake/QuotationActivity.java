@@ -84,15 +84,29 @@ public class QuotationActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.addQuotationToFavouritesMenuItem:
-                DatabaseProviders.getCurrentProvider(this).addQuotation(currentQuotation);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        DatabaseProviders
+                                .getCurrentProvider(QuotationActivity.this)
+                                .addQuotation(currentQuotation);
+                    }
+                }).start();
+
                 addQuotationToFavouritesVisible = false;
                 supportInvalidateOptionsMenu();
                 return true;
             case R.id.getNewQuotationMenuItem:
                 fetchRandomQuotation();
-                addQuotationToFavouritesVisible = DatabaseProviders.getCurrentProvider(this)
-                        .getQuotationByText(currentQuotation.getQuoteText()) == null;
-                supportInvalidateOptionsMenu();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        addQuotationToFavouritesVisible = DatabaseProviders
+                                .getCurrentProvider(QuotationActivity.this)
+                                .getQuotationByText(currentQuotation.getQuoteText()) == null;
+                        supportInvalidateOptionsMenu();
+                    }
+                }).start();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
