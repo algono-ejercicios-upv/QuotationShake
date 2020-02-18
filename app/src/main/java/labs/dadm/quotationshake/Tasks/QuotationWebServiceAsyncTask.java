@@ -62,8 +62,6 @@ public class QuotationWebServiceAsyncTask extends AsyncTask<String, Void, Quotat
                     return new Gson().fromJson(reader, Quotation.class);
                 }
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
