@@ -60,4 +60,7 @@
 
     <string name="quotation_menu_add_item">Add</string>
     <string name="quotation_menu_refresh_item">Refresh</string>
+
+    <string name="internet_not_available">Internet connection is not available.</string>
+    <string name="quotation_fetching_failed">Something failed while trying to fetch a new quotation.\n\nWait a few seconds and try again.</string>
 </resources>

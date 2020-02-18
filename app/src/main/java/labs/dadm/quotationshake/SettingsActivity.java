@@ -7,7 +7,10 @@ import androidx.preference.PreferenceFragmentCompat;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    public static final String USERNAME_KEY = "username";
+    public static final String USERNAME_KEY = "username",
+            LANGUAGE_KEY = "settings_language",
+            HTTP_METHOD_KEY = "settings_http_method",
+            DATABASE_KEY = "settings_database";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

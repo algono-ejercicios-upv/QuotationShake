@@ -48,4 +48,6 @@
     <string name="quotation_sample_quote">Cita de muestra %1$d</string>
     <string name="settings_database_section_title">Bases de datos</string>
     <string name="settings_database_label">Se utilizará el siguiente proveedor de acceso a base de datos</string>
+    <string name="internet_not_available">La conexión a internet no está disponible.</string>
+    <string name="quotation_fetching_failed">Algo ha fallado mientras se intentaba obtener una nueva cita.\n\nEspera unos segundos e inténtalo de nuevo.</string>
 </resources>

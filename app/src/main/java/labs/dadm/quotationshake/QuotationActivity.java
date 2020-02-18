@@ -1,10 +1,13 @@
 package labs.dadm.quotationshake;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +19,7 @@ import labs.dadm.quotationshake.Tasks.QuotationWebServiceAsyncTask;
 
 public class QuotationActivity extends AppCompatActivity {
 
-    private static final String USERNAME_PLACEHOLDER = "%1s",
-            QUOTATION_NUMBER_PLACEHOLDER = "%1$d";
+    private static final String USERNAME_PLACEHOLDER = "%1s";
 
     private static final String
             QUOTATION_KEY = "current_quotation",
@@ -83,8 +85,17 @@ public class QuotationActivity extends AppCompatActivity {
         outState.putBoolean(ADD_OPTION_VISIBLE_KEY, addQuotationToFavouritesVisible);
     }
 
-    public void fetchRandomQuotation() {
-        new QuotationWebServiceAsyncTask(this).execute();
+    public boolean isInternetAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager)
+                getSystemService(CONNECTIVITY_SERVICE);
+
+        if (connectivityManager == null) {
+            return false;
+        } else {
+            final NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
     }
 
     @Override
@@ -111,6 +122,21 @@ public class QuotationActivity extends AppCompatActivity {
         }
     }
 
+    public void fetchRandomQuotation() {
+        if (isInternetAvailable()) {
+            String languageCode = PreferenceManager
+                    .getDefaultSharedPreferences(this)
+                    .getString(SettingsActivity.LANGUAGE_KEY, null);
+
+            new QuotationWebServiceAsyncTask(this).execute(languageCode);
+        } else {
+            Toast.makeText(
+                    this,
+                    R.string.internet_not_available,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void onStartFetchingRandomQuote() {
         state = QuotationActivityState.fetching;
         supportInvalidateOptionsMenu();
@@ -132,20 +158,31 @@ public class QuotationActivity extends AppCompatActivity {
 
         findViewById(R.id.progressBarRandomQuote).setVisibility(View.INVISIBLE);
 
-        randomQuoteTextView.setText(randomQuote.getQuoteText());
-        randomAuthorTextView.setText(
-                randomQuote.getQuoteAuthorOrDefault(this));
+        if (currentQuotation == null) {
+            state = QuotationActivityState.not_fetched;
+            addQuotationToFavouritesVisible = false;
+            supportInvalidateOptionsMenu();
 
-        state = QuotationActivityState.fetched;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                addQuotationToFavouritesVisible = DatabaseProviders
-                        .getCurrentProvider(QuotationActivity.this)
-                        .getQuotationByText(currentQuotation.getQuoteText()) == null;
-                supportInvalidateOptionsMenu();
-            }
-        }).start();
+            Toast.makeText(
+                    this,
+                    R.string.quotation_fetching_failed,
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            randomQuoteTextView.setText(randomQuote.getQuoteText());
+            randomAuthorTextView.setText(
+                    randomQuote.getQuoteAuthorOrDefault(this));
+
+            state = QuotationActivityState.fetched;
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    addQuotationToFavouritesVisible = DatabaseProviders
+                            .getCurrentProvider(QuotationActivity.this)
+                            .getQuotationByText(currentQuotation.getQuoteText()) == null;
+                    supportInvalidateOptionsMenu();
+                }
+            }).start();
+        }
     }
 
     enum QuotationActivityState {not_fetched, fetching, fetched}
