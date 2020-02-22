@@ -2,6 +2,7 @@ package labs.dadm.quotationshake;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,7 +28,35 @@ public class QuotationActivity extends AppCompatActivity {
 
     private Quotation currentQuotation;
     private boolean addQuotationToFavouritesVisible = false;
+
+    private QuotationWebServiceAsyncTask webServiceAsyncTask;
     private QuotationActivityState state = QuotationActivityState.not_fetched;
+
+    public void fetchRandomQuotation() {
+        if (isInternetAvailable()) {
+            String languageCode = PreferenceManager
+                    .getDefaultSharedPreferences(this)
+                    .getString(SettingsActivity.LANGUAGE_KEY, null);
+
+            String requestMethod = PreferenceManager
+                    .getDefaultSharedPreferences(this)
+                    .getString(SettingsActivity.HTTP_METHOD_KEY, null);
+
+            webServiceAsyncTask = new QuotationWebServiceAsyncTask(this);
+
+            if (requestMethod != null) {
+                webServiceAsyncTask.setRequestMethod(
+                        QuotationWebServiceAsyncTask.RequestMethod.valueOf(requestMethod));
+            }
+
+            webServiceAsyncTask.execute(languageCode);
+        } else {
+            Toast.makeText(
+                    this,
+                    R.string.internet_not_available,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,46 +151,6 @@ public class QuotationActivity extends AppCompatActivity {
         }
     }
 
-    public void fetchRandomQuotation() {
-        if (isInternetAvailable()) {
-            String languageCode = PreferenceManager
-                    .getDefaultSharedPreferences(this)
-                    .getString(SettingsActivity.LANGUAGE_KEY, null);
-
-            String requestMethod = PreferenceManager
-                    .getDefaultSharedPreferences(this)
-                    .getString(SettingsActivity.HTTP_METHOD_KEY, null);
-
-            QuotationWebServiceAsyncTask webService
-                    = new QuotationWebServiceAsyncTask(this);
-
-            if (requestMethod != null) {
-                webService.setRequestMethod(
-                        QuotationWebServiceAsyncTask.RequestMethod.valueOf(requestMethod));
-            }
-
-            webService.execute(languageCode);
-        } else {
-            Toast.makeText(
-                    this,
-                    R.string.internet_not_available,
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void onStartFetchingRandomQuote() {
-        state = QuotationActivityState.fetching;
-        supportInvalidateOptionsMenu();
-
-        TextView randomQuoteTextView = findViewById(R.id.textViewRandomQuote);
-        TextView randomAuthorTextView = findViewById(R.id.textViewRandomAuthor);
-
-        randomQuoteTextView.setText("");
-        randomAuthorTextView.setText("");
-
-        findViewById(R.id.progressBarRandomQuote).setVisibility(View.VISIBLE);
-    }
-
     public void onEndFetchingRandomQuote(Quotation randomQuote) {
         currentQuotation = randomQuote;
 
@@ -194,6 +183,30 @@ public class QuotationActivity extends AppCompatActivity {
                     supportInvalidateOptionsMenu();
                 }
             }).start();
+        }
+
+        webServiceAsyncTask = null;
+    }
+
+    public void onStartFetchingRandomQuote() {
+        state = QuotationActivityState.fetching;
+        supportInvalidateOptionsMenu();
+
+        TextView randomQuoteTextView = findViewById(R.id.textViewRandomQuote);
+        TextView randomAuthorTextView = findViewById(R.id.textViewRandomAuthor);
+
+        randomQuoteTextView.setText("");
+        randomAuthorTextView.setText("");
+
+        findViewById(R.id.progressBarRandomQuote).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (webServiceAsyncTask != null
+                && webServiceAsyncTask.getStatus() == AsyncTask.Status.RUNNING) {
+            webServiceAsyncTask.cancel(true);
         }
     }
 
