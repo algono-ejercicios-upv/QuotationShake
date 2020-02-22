@@ -128,7 +128,19 @@ public class QuotationActivity extends AppCompatActivity {
                     .getDefaultSharedPreferences(this)
                     .getString(SettingsActivity.LANGUAGE_KEY, null);
 
-            new QuotationWebServiceAsyncTask(this).execute(languageCode);
+            String requestMethod = PreferenceManager
+                    .getDefaultSharedPreferences(this)
+                    .getString(SettingsActivity.HTTP_METHOD_KEY, null);
+
+            QuotationWebServiceAsyncTask webService
+                    = new QuotationWebServiceAsyncTask(this);
+
+            if (requestMethod != null) {
+                webService.setRequestMethod(
+                        QuotationWebServiceAsyncTask.RequestMethod.valueOf(requestMethod));
+            }
+
+            webService.execute(languageCode);
         } else {
             Toast.makeText(
                     this,
