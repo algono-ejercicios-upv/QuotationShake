@@ -1,4 +1,4 @@
-package labs.dadm.quotationshake;
+package labs.dadm.quotationshake.Fragments;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -16,9 +16,10 @@ import androidx.preference.PreferenceManager;
 
 import labs.dadm.quotationshake.Databases.DatabaseProviders;
 import labs.dadm.quotationshake.Model.Quotation;
+import labs.dadm.quotationshake.R;
 import labs.dadm.quotationshake.Tasks.QuotationWebServiceAsyncTask;
 
-public class QuotationActivity extends AppCompatActivity {
+public class QuotationFragment extends AppCompatActivity {
 
     private static final String USERNAME_PLACEHOLDER = "%1s";
 
@@ -36,11 +37,11 @@ public class QuotationActivity extends AppCompatActivity {
         if (isInternetAvailable()) {
             String languageCode = PreferenceManager
                     .getDefaultSharedPreferences(this)
-                    .getString(SettingsActivity.LANGUAGE_KEY, null);
+                    .getString(SettingsFragment.LANGUAGE_KEY, null);
 
             String requestMethod = PreferenceManager
                     .getDefaultSharedPreferences(this)
-                    .getString(SettingsActivity.HTTP_METHOD_KEY, null);
+                    .getString(SettingsFragment.HTTP_METHOD_KEY, null);
 
             webServiceAsyncTask = new QuotationWebServiceAsyncTask(this);
 
@@ -61,7 +62,7 @@ public class QuotationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quotation);
+        setContentView(R.layout.fragment_quotation);
 
         TextView randomQuoteTextView = findViewById(R.id.textViewRandomQuote);
         if (savedInstanceState == null) {
@@ -100,7 +101,7 @@ public class QuotationActivity extends AppCompatActivity {
 
     private void showWelcomeMessage(TextView randomQuoteTextView) {
         String username = PreferenceManager.getDefaultSharedPreferences(this)
-                .getString(SettingsActivity.USERNAME_KEY,
+                .getString(SettingsFragment.USERNAME_KEY,
                         getString(R.string.quotation_default_username));
         randomQuoteTextView.setText(
                 getString(R.string.quotation_hello).replace(USERNAME_PLACEHOLDER,
@@ -135,7 +136,7 @@ public class QuotationActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         DatabaseProviders
-                                .getCurrentProvider(QuotationActivity.this)
+                                .getCurrentProvider(QuotationFragment.this)
                                 .addQuotation(currentQuotation);
                     }
                 }).start();
@@ -178,7 +179,7 @@ public class QuotationActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     addQuotationToFavouritesVisible = DatabaseProviders
-                            .getCurrentProvider(QuotationActivity.this)
+                            .getCurrentProvider(QuotationFragment.this)
                             .getQuotationByText(currentQuotation.getQuoteText()) == null;
                     supportInvalidateOptionsMenu();
                 }

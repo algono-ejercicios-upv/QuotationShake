@@ -13,15 +13,15 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import labs.dadm.quotationshake.Fragments.QuotationFragment;
 import labs.dadm.quotationshake.Model.Quotation;
-import labs.dadm.quotationshake.QuotationActivity;
 
 public class QuotationWebServiceAsyncTask extends AsyncTask<String, Void, Quotation> {
     private RequestMethod requestMethod = RequestMethod.GET;
 
     private static final String DEFAULT_LANGUAGE_CODE = "en";
 
-    private WeakReference<QuotationActivity> quotationActivityWeakReference;
+    private WeakReference<QuotationFragment> quotationActivityWeakReference;
 
     private static void addGetQueryParameters(Uri.Builder builder, String languageCode) {
         builder.appendQueryParameter("method", "getQuote")
@@ -29,8 +29,8 @@ public class QuotationWebServiceAsyncTask extends AsyncTask<String, Void, Quotat
                 .appendQueryParameter("lang", languageCode);
     }
 
-    public QuotationWebServiceAsyncTask(QuotationActivity quotationActivity) {
-        this.quotationActivityWeakReference = new WeakReference<>(quotationActivity);
+    public QuotationWebServiceAsyncTask(QuotationFragment quotationFragment) {
+        this.quotationActivityWeakReference = new WeakReference<>(quotationFragment);
     }
 
     private static String getPostQueryParameters(String languageCode) {
@@ -110,18 +110,18 @@ public class QuotationWebServiceAsyncTask extends AsyncTask<String, Void, Quotat
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        QuotationActivity quotationActivity = quotationActivityWeakReference.get();
-        if (quotationActivity != null) {
-            quotationActivity.onStartFetchingRandomQuote();
+        QuotationFragment quotationFragment = quotationActivityWeakReference.get();
+        if (quotationFragment != null) {
+            quotationFragment.onStartFetchingRandomQuote();
         }
     }
 
     @Override
     protected void onPostExecute(Quotation quotation) {
         super.onPostExecute(quotation);
-        QuotationActivity quotationActivity = quotationActivityWeakReference.get();
-        if (quotationActivity != null) {
-            quotationActivity.onEndFetchingRandomQuote(quotation);
+        QuotationFragment quotationFragment = quotationActivityWeakReference.get();
+        if (quotationFragment != null) {
+            quotationFragment.onEndFetchingRandomQuote(quotation);
         }
     }
 }

@@ -1,11 +1,13 @@
-package labs.dadm.quotationshake;
+package labs.dadm.quotationshake.Fragments;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
-public class SettingsActivity extends AppCompatActivity {
+import labs.dadm.quotationshake.R;
+
+public class SettingsFragment extends AppCompatActivity {
 
     public static final String USERNAME_KEY = "username",
             LANGUAGE_KEY = "settings_language",
@@ -15,14 +17,14 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.fragment_settings);
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.settingsFrameLayout, new SettingsFragment())
+                .replace(R.id.settingsFrameLayout, new PreferenceSettingsFragment())
                 .commit();
     }
 
-    public static class SettingsFragment extends PreferenceFragmentCompat {
+    public static class PreferenceSettingsFragment extends PreferenceFragmentCompat {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

@@ -7,6 +7,11 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import labs.dadm.quotationshake.Fragments.AboutFragment;
+import labs.dadm.quotationshake.Fragments.FavouriteFragment;
+import labs.dadm.quotationshake.Fragments.QuotationFragment;
+import labs.dadm.quotationshake.Fragments.SettingsFragment;
+
 public class DashboardActivity extends AppCompatActivity {
 
     /**
@@ -33,10 +38,10 @@ public class DashboardActivity extends AppCompatActivity {
     private static SparseArray<Class> createNavButtonIdMap() {
         SparseArray<Class> navButtonIdMap = new SparseArray<>();
 
-        navButtonIdMap.append(R.id.button_goto_get, QuotationActivity.class);
-        navButtonIdMap.append(R.id.button_goto_about, AboutActivity.class);
-        navButtonIdMap.append(R.id.button_goto_favourite, FavouriteActivity.class);
-        navButtonIdMap.append(R.id.button_goto_settings, SettingsActivity.class);
+        navButtonIdMap.append(R.id.button_goto_get, QuotationFragment.class);
+        navButtonIdMap.append(R.id.button_goto_about, AboutFragment.class);
+        navButtonIdMap.append(R.id.button_goto_favourite, FavouriteFragment.class);
+        navButtonIdMap.append(R.id.button_goto_settings, SettingsFragment.class);
 
         return navButtonIdMap;
     }

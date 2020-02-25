@@ -6,73 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".DashboardActivity">
 
-    <Button
-        android:id="@+id/button_goto_get"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutButtons"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/button_selectors_dashboard"
-        android:onClick="onNavigationButtonPressed"
-        android:text="@string/get_option"
-        android:textColor="@color/button_color_dashboard"
-        app:layout_constraintBottom_toTopOf="@+id/button_goto_favourite"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/frameLayoutDashboard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/button_goto_favourite"
+        <Button
+            android:id="@+id/button_goto_get"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selectors_dashboard"
+            android:onClick="onNavigationButtonPressed"
+            android:text="@string/get_option"
+            android:textColor="@color/button_color_dashboard"
+            app:layout_constraintEnd_toStartOf="@+id/button_goto_favourite"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_goto_favourite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selectors_dashboard"
+            android:onClick="onNavigationButtonPressed"
+            android:text="@string/favourite_option"
+            android:textColor="@color/button_color_dashboard"
+            app:layout_constraintEnd_toStartOf="@+id/button_goto_settings"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_goto_get"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_goto_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selectors_dashboard"
+            android:onClick="onNavigationButtonPressed"
+            android:text="@string/settings_option"
+            android:textColor="@color/button_color_dashboard"
+            app:layout_constraintEnd_toStartOf="@+id/button_goto_about"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_goto_favourite"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_goto_about"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/button_selectors_dashboard"
+            android:onClick="onNavigationButtonPressed"
+            android:text="@string/about_option"
+            android:textColor="@color/button_color_dashboard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_goto_settings"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayoutDashboard"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/button_selectors_dashboard"
-        android:onClick="onNavigationButtonPressed"
-        android:text="@string/favourite_option"
-        android:textColor="@color/button_color_dashboard"
-        app:layout_constraintBottom_toTopOf="@+id/button_goto_settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_goto_get" />
-
-    <Button
-        android:id="@+id/button_goto_settings"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/button_selectors_dashboard"
-        android:onClick="onNavigationButtonPressed"
-        android:text="@string/settings_option"
-        android:textColor="@color/button_color_dashboard"
-        app:layout_constraintBottom_toTopOf="@+id/button_goto_about"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_goto_favourite" />
-
-    <Button
-        android:id="@+id/button_goto_about"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_selectors_dashboard"
-        android:onClick="onNavigationButtonPressed"
-        android:text="@string/about_option"
-        android:textColor="@color/button_color_dashboard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_goto_settings" />
+        app:layout_constraintTop_toBottomOf="@id/constraintLayoutButtons">
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

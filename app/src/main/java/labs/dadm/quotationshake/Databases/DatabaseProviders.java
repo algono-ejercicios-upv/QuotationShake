@@ -5,8 +5,8 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
+import labs.dadm.quotationshake.Fragments.SettingsFragment;
 import labs.dadm.quotationshake.R;
-import labs.dadm.quotationshake.SettingsActivity;
 
 public class DatabaseProviders {
     public static synchronized DatabaseProvider getCurrentProvider(Context context) {
@@ -22,7 +22,7 @@ public class DatabaseProviders {
     @Nullable
     public static String getCurrentProviderName(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(SettingsActivity.DATABASE_KEY, null);
+                .getString(SettingsFragment.DATABASE_KEY, null);
     }
 
     public static synchronized DatabaseProvider getProvider(Context context, String providerName) {

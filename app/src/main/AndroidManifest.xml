@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".QuotationActivity"
+            android:name=".Fragments.QuotationFragment"
             android:label="@string/quotation_title"
             android:parentActivityName=".DashboardActivity">
             <meta-data
@@ -21,7 +21,7 @@
                 android:value=".DashboardActivity" />
         </activity>
         <activity
-            android:name=".FavouriteActivity"
+            android:name=".Fragments.FavouriteFragment"
             android:label="@string/favourite_title"
             android:parentActivityName=".DashboardActivity">
             <meta-data
@@ -29,7 +29,7 @@
                 android:value=".DashboardActivity" />
         </activity>
         <activity
-            android:name=".AboutActivity"
+            android:name=".Fragments.AboutFragment"
             android:label="@string/about_title"
             android:parentActivityName=".DashboardActivity">
             <meta-data
@@ -37,7 +37,7 @@
                 android:value=".DashboardActivity" />
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Fragments.SettingsFragment"
             android:label="@string/settings_title"
             android:theme="@style/AppTheme.Settings"
             android:parentActivityName=".DashboardActivity">

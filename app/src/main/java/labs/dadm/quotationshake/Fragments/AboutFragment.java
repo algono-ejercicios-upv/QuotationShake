@@ -1,14 +1,16 @@
-package labs.dadm.quotationshake;
+package labs.dadm.quotationshake.Fragments;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AboutActivity extends AppCompatActivity {
+import labs.dadm.quotationshake.R;
+
+public class AboutFragment extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.fragment_about);
     }
 }

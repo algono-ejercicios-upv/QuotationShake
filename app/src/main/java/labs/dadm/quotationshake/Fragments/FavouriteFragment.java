@@ -1,4 +1,4 @@
-package labs.dadm.quotationshake;
+package labs.dadm.quotationshake.Fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,9 +23,10 @@ import java.util.List;
 import labs.dadm.quotationshake.Adapter.QuotationAdapter;
 import labs.dadm.quotationshake.Databases.DatabaseProviders;
 import labs.dadm.quotationshake.Model.Quotation;
+import labs.dadm.quotationshake.R;
 import labs.dadm.quotationshake.Tasks.FavouriteQuotationDBAsyncTask;
 
-public class FavouriteActivity extends AppCompatActivity {
+public class FavouriteFragment extends AppCompatActivity {
 
     private static final String WIKI_SEARCH_URL = "https://en.wikipedia.org/wiki/Special:Search?search=";
 
@@ -34,7 +35,7 @@ public class FavouriteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_favourite);
+        setContentView(R.layout.fragment_favourite);
 
         quotationAdapter = new QuotationAdapter(new ArrayList<Quotation>(), new QuotationAdapter.OnItemClickListener() {
             @Override
@@ -42,16 +43,16 @@ public class FavouriteActivity extends AppCompatActivity {
                 try {
                     displayAuthorInfo(adapter.getQuotationAt(position));
                 } catch (IllegalArgumentException ex) {
-                    Toast.makeText(FavouriteActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FavouriteFragment.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 } catch (UnsupportedEncodingException ex) {
-                    Toast.makeText(FavouriteActivity.this, R.string.exception_unsupported_encoding_author,
+                    Toast.makeText(FavouriteFragment.this, R.string.exception_unsupported_encoding_author,
                             Toast.LENGTH_SHORT).show();
                 }
             }
         }, new QuotationAdapter.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClickListener(final QuotationAdapter adapter, final int position) {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(FavouriteActivity.this);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(FavouriteFragment.this);
                 dialogBuilder.setMessage(R.string.confirmation_delete_quotation);
                 dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
                     @Override
@@ -61,7 +62,7 @@ public class FavouriteActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 DatabaseProviders
-                                        .getCurrentProvider(FavouriteActivity.this)
+                                        .getCurrentProvider(FavouriteFragment.this)
                                         .removeQuotation(quotationToRemove);
                             }
                         }).start();
@@ -104,7 +105,7 @@ public class FavouriteActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.clearAllQuotationsMenuItem:
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(FavouriteActivity.this);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(FavouriteFragment.this);
                 dialogBuilder.setMessage(R.string.confirmation_clear_all_quotations);
                 dialogBuilder.setPositiveButton(R.string.confirmation_yes, new DialogInterface.OnClickListener() {
                     @Override
@@ -113,7 +114,7 @@ public class FavouriteActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 DatabaseProviders
-                                        .getCurrentProvider(FavouriteActivity.this)
+                                        .getCurrentProvider(FavouriteFragment.this)
                                         .clearQuotations();
                             }
                         }).start();
